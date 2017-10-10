@@ -15,11 +15,15 @@ def parseFile(path):
 
 def download(arr):
     for url in arr:
-        start = time.time()
-        file_name = url.split('/')[-1]
-        urllib.request.urlretrieve(url, file_name)
-        t = time.time()
-        print("%s [%.2f s]" % (file_name, t - start))
+        try:
+            start = time.time()
+            file_name = url.split('/')[-1]
+            urllib.request.urlretrieve(url, file_name)
+            t = time.time()
+            print(u" \u2713  " + "%s [%.2f s]" % (file_name, t - start))
+        except:
+            print("!!  Failed to download from " + url)
+
 
 if __name__ == '__main__':
     # print('Hello World')
