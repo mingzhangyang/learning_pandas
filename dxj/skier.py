@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import pygame, sys, random
 skier_images=["skier_down.png", "skier_right1.png", "skier_right2.png", "skier_left2.png", "skier_left1.png"]
 
@@ -26,7 +27,7 @@ class SkierClass(pygame.sprite.Sprite):
         if self.rect.centerx > 620: self.rect.centerx = 620
 
 class ObstacleClass(pygame.sprite.Sprite):
-    def __init__(self, image_file, lacation, type):
+    def __init__(self, image_file, location, type): # typo of location, you input lacation
         pygame.sprite.Sprite.__init__(self)
         self.image_file = image_file
         self.image = pygame.image.load(image_file)
@@ -46,14 +47,16 @@ def create_map():
     for i in range(10):
         row = random.randint(0, 9)
         col = random.randint(0, 9)
-        location = [col * 64+20, row*64+20+640]
-        if not (lacation in locations):
+        location = [col * 64+20, row*64 + 20 + 640]
+        if not (location in locations): # typo of location, you input lacation
             locations.append(location)
             type = random.choice(["tree", "flag"])
-            if type == "tree": img = "skier_tree.png"
-            elif type == "flag": img = "skier_flag.png"
+            if type == "tree": 
+                img = "skier_tree.png"
+            elif type == "flag": 
+                img = "skier_flag.png"
             obstacle = ObstacleClass(img, location, type)
-            obstacle.add(obstacle)
+            obstacles.add(obstacle) #typo of obstacles, you input obstacle
 
 def animate():
     screen.fill([255, 255, 255])
@@ -77,7 +80,7 @@ running = True
 while running:
     clock.tick(30)
     for event in pygame.event.get():
-        if event.type == pygame.QIUT:
+        if event.type == pygame.QUIT: # typo of QUIT, you input QIUT
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
@@ -105,7 +108,8 @@ while running:
             hit[0].kill()
 
     obstacles.update()
-    acore_text = font.render("Score: " +str(points), 1, (0, 0, 0)) # missed the closing ")"
+    score_text = font.render("Score: " +str(points), 1, (0, 0, 0)) # missed the closing ")"
+    # typo of score in above line, you input acore
     animate()
 pygame.quit()
                                     
